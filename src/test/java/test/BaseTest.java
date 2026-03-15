@@ -9,6 +9,7 @@ import org.testng.annotations.Parameters;
 import pages.LoginPage;
 import util.Config;
 import util.ConfigLoader;
+import util.PasswordUtils;
 
 public abstract class BaseTest {
 
@@ -44,7 +45,8 @@ public abstract class BaseTest {
     protected void loginAsDefaultUser() {
         LoginPage loginPage = new LoginPage();
         loginPage.open();
-        loginPage.login(getConfig().getUsername(), getConfig().getPassword());
+        String decodedPassword = PasswordUtils.decode(getConfig().getPassword());
+        loginPage.login(getConfig().getUsername(), decodedPassword);
     }
 }
 
